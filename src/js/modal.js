@@ -126,7 +126,6 @@
         this.modalWrapper.id = this.opts.modalId;
         this.modalWrapper.style.display = 'none';
 
-        // 닫기버튼
         this.modalCloseBtn = document.createElement('button');
         this.modalCloseBtn.classList.add('custom-modal-close');
 
@@ -135,14 +134,11 @@
         this.modalCloseBtnIcon.innerHTML = '×';
         this.modalCloseBtn.appendChild(this.modalCloseBtnIcon);
 
-        // 모달
         this.modal = document.createElement('div');
         this.modal.classList.add('custom-modal-box');
 
-        // 모달 닫기 버튼
         this.modal.appendChild(this.modalCloseBtn);
 
-        // 모달 컨텐츠 영역
         this.modalContent = document.createElement('div');
         this.modalContent.classList.add('custom-modal-box-content');
         this.modalContent.style.height = this.opts.height + 'px';
