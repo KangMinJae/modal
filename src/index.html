@@ -3,17 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" href="css/modal.css">
-    <title>모달 플러그인 데모사이트</title>
+    <title>moddal plugin demo</title>
 </head>
 <body>
-    <h1>샘플</h1>
+    <h1>sample</h1>
     <div class="button-area">
-        <button type="button" class="modal-open-button" data-modal-bgclick="true">모달열기 버튼</button>
+        <button type="button" class="modal-open-button" data-modal-bgclick="true">modal open button</button>
     </div>
     <div class="dialog-tutorial" style="padding-top: 20px;">
-        <h1>모달 사용법</h1>
+        <h1>modal tutorial</h1>
         <p>참고사항: 모달 내에 있는 컨텐츠영역과 버튼영역 내 디자인은 모달 컨트롤 사용자가 직접 디자인을 해야합니다.</p>
-        <p>1. 모달 생성방법</p>
+        <p>1. create modal</p>
         <pre>
         var modal = new Modal({
             modalId: 'modalId',                 // 모달아이디 설정(기본값 '')
@@ -35,48 +35,48 @@
             }
         });
         </pre>
-        <p>2. 모달 컨텐츠 설정 및 모달 컨텐츠영역 가져오는 방법</p>
+        <p>2. modal setContent method and modal getContent method</p>
         <pre>
-        // 모달 컨텐츠 영역 설정
+        // modal setContent method
         modal.setContent(param);
             <span style="color: red">param(string)</span> - 컨텐츠영역에 구성할 엘리먼트
 
-        // 모달 컨텐츠영역 가져오기
+        // modal getContent method
         modal.getContent();
             <span style="color: red">return</span> - 컨텐츠영역 엘리먼트
         </pre>
-        <p>3. 모달 버튼영역 설정하는 방법</p>
+        <p>3. modal setButtonArea method and modal getButtonArea method</p>
         <pre>
-        // 모달 버튼영역 설정
+        // modal setButtonArea method
         modal.setButtonAreaContent(param);
             <span style="color: red">param(string)</span> - 버튼영역에 구성할 엘리먼트
 
-        // 모달 컨텐츠영역 가져오기
+        // modal getButtonArea method
         modal.getButtonAreaContent();
             <span style="color: red">return</span> - 버튼영역 엘리먼트
         </pre>
-        <p>4. 개별 요소에 다른 Callback 사용 방법</p>
+        <p>4. custom event callback use method</p>
         <pre>
         // beforeShow customEvent
         $('#modalId').on('beforeShow', function () {
-            console.log('beforeShow 이벤트 발생');
+            console.log('beforeShow event');
         });
 
         // afterHide customEvent
         $('#modalId').on('afterHide', function () {
-            console.log('afterHide 이벤트 발생');
+            console.log('afterHide event');
         });
         </pre>
-        <p>5. 외부 function에서 수동으로 모달 열기, 닫기 기능 구현</p>
+        <p>5. other modal open and close method</p>
         <pre>
         modalShowHide(param);
             <span style="color: red">param(string) -  show, hide</span>
                 => param 값이 <span style="color: red">show</span> 일 때는 모달열기, param 값이 <span style="color: red">hide</span> 일 때는 모달닫기 기능 실행
 
-        // 모달 열기
+        // modal open
         $('#modalId').modalShowHide('show');
 
-        // 모달 닫기
+        // modal close
         $('#modalId').modalShowHide('hide');
         </pre>
     </div>
@@ -89,7 +89,7 @@
     </div>
     <div>
         <label style="font-size: 20px; padding-left: 20px;">모달 내의 모달 여는 버튼: </label>
-        <button type="button" onclick="multiModal();" style="border: 1px solid #aaa; background: none; padding: 14px; font-size: 15px; cursor: pointer;">멀티모달</button>
+        <button type="button" onclick="multiModal();" style="border: 1px solid #aaa; background: none; padding: 14px; font-size: 15px; cursor: pointer;">multi modal</button>
     </div>
 </script>
 <script src="js/modal.js" type="text/javascript"></script>
@@ -115,7 +115,7 @@
         });
 
         /**
-         *  모달 여는 방법
+         *  modal open method
          *  1. modal.open();
          *  2. $('#modalId').modalShowHide('show');
         */
@@ -131,7 +131,7 @@
 
         $('#innerModalId').modalShowHide('show');
 
-        innerModal.setContent('<h1>중첩모달</h1>');
+        innerModal.setContent('<h1>multi modal</h1>');
     }
 </script>
 </html>
