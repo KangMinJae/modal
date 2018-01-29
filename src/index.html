@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="css/modal.css">
+    <title>모달 플러그인 데모사이트</title>
+</head>
+<body>
+    <h1>샘플</h1>
+    <div class="button-area">
+        <button type="button" class="modal-open-button" data-modal-bgclick="true">모달열기 버튼</button>
+    </div>
+    <div class="dialog-tutorial" style="padding-top: 20px;">
+        <h1>모달 사용법</h1>
+        <p>참고사항: 모달 내에 있는 컨텐츠영역과 버튼영역 내 디자인은 모달 컨트롤 사용자가 직접 디자인을 해야합니다.</p>
+        <p>1. 모달 생성방법</p>
+        <pre>
+        var modal = new Modal({
+            modalId: 'modalId',                 // 모달아이디 설정(기본값 '')
+            multiple: false,                    // 모달중첩 설정(기본값 true)
+            buttonArea: false,                  // 모달 버튼영역 유무 설정(기본값 false)
+            overlayClose: true,                 // 모달영역 바깥쪽 클릭 시 모달 닫기 여부(기본값 false)
+            height: 300,                        // 모달 높이 설정(기본값 200)
+            onOpen: function() {                // 모달 열렸을 때 발생
+                console.log('onOpen');
+            },
+            onClose: function() {               // 모달 닫혔을 때 발생
+                console.log('onClose');
+            },
+            onBeforeOpen: function() {          // 모달 열리기 전에 발생
+                console.log('beforeOpen');
+            },
+            onAfterClose: function() {          // 모달 닫고 나서 발생
+                console.log('afterClose');
+            }
+        });
+        </pre>
+        <p>2. 모달 컨텐츠 설정 및 모달 컨텐츠영역 가져오는 방법</p>
+        <pre>
+        // 모달 컨텐츠 영역 설정
+        modal.setContent(param);
+            <span style="color: red">param(string)</span> - 컨텐츠영역에 구성할 엘리먼트
+
+        // 모달 컨텐츠영역 가져오기
+        modal.getContent();
+            <span style="color: red">return</span> - 컨텐츠영역 엘리먼트
+        </pre>
+        <p>3. 모달 버튼영역 설정하는 방법</p>
+        <pre>
+        // 모달 버튼영역 설정
+        modal.setButtonAreaContent(param);
+            <span style="color: red">param(string)</span> - 버튼영역에 구성할 엘리먼트
+
+        // 모달 컨텐츠영역 가져오기
+        modal.getButtonAreaContent();
+            <span style="color: red">return</span> - 버튼영역 엘리먼트
+        </pre>
+        <p>4. 개별 요소에 다른 Callback 사용 방법</p>
+        <pre>
+        // beforeShow customEvent
+        $('#modalId').on('beforeShow', function () {
+            console.log('beforeShow 이벤트 발생');
+        });
+
+        // afterHide customEvent
+        $('#modalId').on('afterHide', function () {
+            console.log('afterHide 이벤트 발생');
+        });
+        </pre>
+        <p>5. 외부 function에서 수동으로 모달 열기, 닫기 기능 구현</p>
+        <pre>
+        modalShowHide(param);
+            <span style="color: red">param(string) -  show, hide</span>
+                => param 값이 <span style="color: red">show</span> 일 때는 모달열기, param 값이 <span style="color: red">hide</span> 일 때는 모달닫기 기능 실행
+
+        // 모달 열기
+        $('#modalId').modalShowHide('show');
+
+        // 모달 닫기
+        $('#modalId').modalShowHide('hide');
+        </pre>
+    </div>
+</body>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+<script type="text/template" id="modalContentTemplate">
+    <div>
+        <h1>부모모달</h1>
+    </div>
+    <div>
+        <label style="font-size: 20px; padding-left: 20px;">모달 내의 모달 여는 버튼: </label>
+        <button type="button" onclick="multiModal();" style="border: 1px solid #aaa; background: none; padding: 14px; font-size: 15px; cursor: pointer;">멀티모달</button>
+    </div>
+</script>
+<script src="js/modal.js" type="text/javascript"></script>
+<script>
+    $('.modal-open-button').on('click', function () {
+        var templateStr = document.getElementById('modalContentTemplate').innerHTML;
+        var modal = new Modal({
+            modalId: 'modalId',
+            multiple: false,
+            overlayClose: true,
+            onOpen: function () {
+                console.log('onOpen');
+            },
+            onClose: function () {
+                console.log('onClose');
+            },
+            onBeforeOpen: function () {
+                console.log('onBeforeOpen');
+            },
+            onAfterClose: function () {
+                console.log('onAfterClose');
+            }
+        });
+
+        /**
+         *  모달 여는 방법
+         *  1. modal.open();
+         *  2. $('#modalId').modalShowHide('show');
+        */
+        modal.open();
+
+        modal.setContent(templateStr);
+    });
+
+    function multiModal() {
+        var innerModal = new Modal({
+            modalId: 'innerModalId'
+        });
+
+        $('#innerModalId').modalShowHide('show');
+
+        innerModal.setContent('<h1>중첩모달</h1>');
+    }
+</script>
+</html>
